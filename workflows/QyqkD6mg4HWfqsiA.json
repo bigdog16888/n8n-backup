@@ -1,217 +1,20 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
-    "On clicking 'execute'": {
+    "When chat message received": {
       "main": [
         [
           {
-            "node": "n8n",
+            "node": "AI Agent",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "n8n": {
+    "AI Agent": {
       "main": [
         [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get File": {
-      "main": [
-        [
-          {
-            "node": "Merge Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If file too large": {
-      "main": [
-        [
-          {
-            "node": "Get File",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Merge Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Merge Items": {
-      "main": [
-        [
-          {
-            "node": "isDiffOrNew",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "isDiffOrNew": {
-      "main": [
-        [
-          {
-            "node": "Check Status",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Check Status": {
-      "main": [
-        [
-          {
-            "node": "Same file - Do nothing",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "File is different",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "File is new",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Same file - Do nothing": {
-      "main": [
-        [
-          {
-            "node": "Return",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "File is different": {
-      "main": [
-        [
-          {
-            "node": "Edit existing file",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "File is new": {
-      "main": [
-        [
-          {
-            "node": "Create new file",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Create new file": {
-      "main": [
-        [
-          {
-            "node": "Return",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit existing file": {
-      "main": [
-        [
-          {
-            "node": "Return",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Loop Over Items": {
-      "main": [
-        [],
-        [
-          {
-            "node": "Call 'Backup'",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Schedule Trigger": {
-      "main": [
-        [
-          {
-            "node": "n8n",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get file data": {
-      "main": [
-        [
-          {
-            "node": "If file too large",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Globals": {
-      "main": [
-        [
-          {
-            "node": "Get file data",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Execute Workflow Trigger": {
-      "main": [
-        [
-          {
-            "node": "Merge Items",
-            "type": "main",
-            "index": 1
-          },
-          {
-            "node": "tag?",
-            "type": "main",
-            "index": 0
-          },
           {
             "node": "HTTP Request",
             "type": "main",
@@ -220,598 +23,268 @@
         ]
       ]
     },
-    "/": {
-      "main": [
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
         [
           {
-            "node": "Globals",
-            "type": "main",
+            "node": "AI Agent",
+            "type": "ai_languageModel",
             "index": 0
           }
         ]
       ]
     },
-    "tag?": {
-      "main": [
+    "Redis Chat Memory": {
+      "ai_memory": [
         [
           {
-            "node": "/",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Globals",
-            "type": "main",
+            "node": "AI Agent",
+            "type": "ai_memory",
             "index": 0
           }
         ]
       ]
     },
-    "Call 'Backup'": {
-      "main": [
+    "OpenWeatherMap": {
+      "ai_tool": [
         [
           {
-            "node": "Loop Over Items",
-            "type": "main",
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Translate a language in DeepL": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
             "index": 0
           }
         ]
       ]
     }
   },
-  "createdAt": "2025-10-25T02:22:13.248Z",
-  "id": "QyqkD6mg4HWfqsiA",
+  "createdAt": "2025-10-19T06:58:13.566Z",
+  "id": "QSbxoKnRnNBc9Nw4",
   "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Backup",
+  "name": "Chat",
   "nodes": [
     {
-      "parameters": {},
-      "id": "d6b4a645-99bc-4836-9f8e-9750a267da3e",
-      "name": "On clicking 'execute'",
-      "type": "n8n-nodes-base.manualTrigger",
-      "position": [
-        -144,
-        288
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "content": "## Subworkflow",
-        "height": 767,
-        "width": 2547,
-        "color": 6
-      },
-      "id": "bb695739-8d44-4f8e-b544-d1bab119d026",
-      "name": "Sticky Note",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        -240,
-        448
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "filters": {},
-        "requestOptions": {}
-      },
-      "id": "a96c0460-3afc-4a1a-a9d0-481c1fa8b172",
-      "name": "n8n",
-      "type": "n8n-nodes-base.n8n",
-      "position": [
-        80,
-        384
-      ],
-      "typeVersion": 1,
-      "credentials": {
-        "n8nApi": {
-          "id": "F0ftDdtH8yxaZJZi",
-          "name": "n8n account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "8d513345-6484-431f-afb7-7cf045c90f4f",
-              "name": "Done",
-              "type": "boolean",
-              "value": true
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "6a59022d-5217-4ec4-8d11-61fcd56c41fa",
-      "name": "Return",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        2544,
-        848
-      ],
-      "typeVersion": 3.3
-    },
-    {
-      "parameters": {
-        "url": "=https://api.github.com/repos/bigdog16888/n8n-backup/contents/{{ $json.repo.path }}",
-        "options": {}
-      },
-      "id": "ba77a05f-8258-440d-a021-79063db55ad2",
-      "name": "Get File",
-      "type": "n8n-nodes-base.httpRequest",
-      "position": [
-        1200,
-        704
-      ],
-      "typeVersion": 4.2
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "version": 1,
-            "leftValue": "",
-            "caseSensitive": true,
-            "typeValidation": "strict"
-          },
-          "combinator": "and",
-          "conditions": [
-            {
-              "id": "45ce825e-9fa6-430c-8931-9aaf22c42585",
-              "operator": {
-                "type": "string",
-                "operation": "empty",
-                "singleValue": true
-              },
-              "leftValue": "={{ $json.content }}",
-              "rightValue": ""
-            },
-            {
-              "id": "9619a55f-7fb1-4f24-b1a7-7aeb82365806",
-              "operator": {
-                "type": "string",
-                "operation": "notExists",
-                "singleValue": true
-              },
-              "leftValue": "={{ $json.error }}",
-              "rightValue": ""
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "9011f2c8-72b8-4201-8769-0177255cc63b",
-      "name": "If file too large",
-      "type": "n8n-nodes-base.if",
-      "position": [
-        976,
-        848
-      ],
-      "typeVersion": 2
-    },
-    {
-      "parameters": {},
-      "id": "2b88ddda-91a7-4c27-9331-5ee425e13592",
-      "name": "Merge Items",
-      "type": "n8n-nodes-base.merge",
-      "position": [
-        1424,
-        880
-      ],
-      "typeVersion": 2
-    },
-    {
-      "parameters": {
-        "jsCode": "const orderJsonKeys = (jsonObj) => {\n  const ordered = {};\n  Object.keys(jsonObj).sort().forEach(key => {\n    ordered[key] = jsonObj[key];\n  });\n  return ordered;\n}\n\n// Check if file returned with content\nif (Object.keys($input.all()[0].json).includes(\"content\")) {\n  // Decode base64 content and parse JSON\n  const origWorkflow = JSON.parse(Buffer.from($input.all()[0].json.content, 'base64').toString());\n  const n8nWorkflow = $input.all()[1].json;\n  \n  // Order JSON objects\n  const orderedOriginal = orderJsonKeys(origWorkflow);\n  const orderedActual = orderJsonKeys(n8nWorkflow);\n\n  // Determine difference\n  if (JSON.stringify(orderedOriginal) === JSON.stringify(orderedActual)) {\n    $input.all()[0].json.github_status = \"same\";\n  } else {\n    $input.all()[0].json.github_status = \"different\";\n    $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n  }\n  $input.all()[0].json.content_decoded = orderedOriginal;\n// No file returned / new workflow\n} else if (Object.keys($input.all()[0].json).includes(\"data\")) {\n  const origWorkflow = JSON.parse($input.all()[0].json.data);\n  const n8nWorkflow = $input.all()[1].json;\n  \n  // Order JSON objects\n  const orderedOriginal = orderJsonKeys(origWorkflow);\n  const orderedActual = orderJsonKeys(n8nWorkflow);\n\n  // Determine difference\n  if (JSON.stringify(orderedOriginal) === JSON.stringify(orderedActual)) {\n    $input.all()[0].json.github_status = \"same\";\n  } else {\n    $input.all()[0].json.github_status = \"different\";\n    $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n  }\n  $input.all()[0].json.content_decoded = orderedOriginal;\n\n} else {\n  // Order JSON object\n  const n8nWorkflow = $input.all()[1].json;\n  const orderedActual = orderJsonKeys(n8nWorkflow);\n  \n  // Proper formatting\n  $input.all()[0].json.github_status = \"new\";\n  $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n}\n\n// Return items\nreturn $input.all();"
-      },
-      "id": "5ff5aa25-2c4f-4042-af8d-ae7a89e8b8c5",
-      "name": "isDiffOrNew",
-      "type": "n8n-nodes-base.code",
-      "position": [
-        1648,
-        880
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "dataType": "string",
-        "value1": "={{$json.github_status}}",
-        "rules": {
-          "rules": [
-            {
-              "value2": "same"
-            },
-            {
-              "value2": "different",
-              "output": 1
-            },
-            {
-              "value2": "new",
-              "output": 2
-            }
-          ]
-        }
-      },
-      "id": "f9c7c3b9-427d-4ae8-b361-d7f0d4c5066c",
-      "name": "Check Status",
-      "type": "n8n-nodes-base.switch",
-      "position": [
-        1872,
-        848
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {},
-      "id": "c49823ec-26bd-4959-8741-a19246180f27",
-      "name": "Same file - Do nothing",
-      "type": "n8n-nodes-base.noOp",
-      "position": [
-        2320,
-        736
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {},
-      "id": "6341d9f5-8f0b-4579-b48a-5edec3aa2f61",
-      "name": "File is different",
-      "type": "n8n-nodes-base.noOp",
-      "position": [
-        2096,
-        928
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {},
-      "id": "ddbb0b19-3a3e-4a0f-b2d6-3a6a562bb695",
-      "name": "File is new",
-      "type": "n8n-nodes-base.noOp",
-      "position": [
-        2096,
-        1120
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "resource": "file",
-        "owner": {
-          "__rl": true,
-          "mode": "name",
-          "value": "={{ $('Globals').item.json.repo.owner }}"
-        },
-        "repository": {
-          "__rl": true,
-          "mode": "name",
-          "value": "={{ $('Globals').item.json.repo.name }}"
-        },
-        "filePath": "={{ $('Globals').item.json.repo.path }}{{$('Execute Workflow Trigger').first().json.id}}.json",
-        "fileContent": "={{$('isDiffOrNew').item.json[\"n8n_data_stringy\"]}}",
-        "commitMessage": "={{$('Execute Workflow Trigger').first().json.name}} ({{$json.github_status}})"
-      },
-      "id": "66d42aaf-5307-48da-9f52-e020ab6bec5a",
-      "name": "Create new file",
-      "type": "n8n-nodes-base.github",
-      "position": [
-        2320,
-        1120
-      ],
-      "typeVersion": 1,
-      "webhookId": "b675514d-fb54-4180-8e91-6022781faab6",
-      "credentials": {
-        "githubApi": {
-          "id": "lwdnJ9dwaBGE6xmR",
-          "name": "GitHub account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "file",
-        "operation": "edit",
-        "owner": {
-          "__rl": true,
-          "mode": "name",
-          "value": "={{ $('Globals').item.json.repo.owner }}"
-        },
-        "repository": {
-          "__rl": true,
-          "mode": "name",
-          "value": "={{ $('Globals').item.json.repo.name }}"
-        },
-        "filePath": "={{ $('Globals').item.json.repo.path }}",
-        "fileContent": "={{$('isDiffOrNew').item.json[\"n8n_data_stringy\"]}}",
-        "commitMessage": "= {{ $json.path }}({{$json.github_status}})"
-      },
-      "id": "47db0169-754a-453f-8d0d-06a8ada98784",
-      "name": "Edit existing file",
-      "type": "n8n-nodes-base.github",
-      "position": [
-        2320,
-        928
-      ],
-      "typeVersion": 1,
-      "webhookId": "4b63a6dd-510f-46e0-91e2-9c10ac4d5a49",
-      "credentials": {
-        "githubApi": {
-          "id": "lwdnJ9dwaBGE6xmR",
-          "name": "GitHub account"
-        }
-      }
-    },
-    {
       "parameters": {
         "options": {}
       },
-      "id": "307743f6-88ae-42e0-9406-929f5e97be9a",
-      "name": "Loop Over Items",
-      "type": "n8n-nodes-base.splitInBatches",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
       "position": [
-        304,
-        384
+        208,
+        304
       ],
-      "typeVersion": 3
+      "id": "0915f655-7b8a-4075-9f6b-b6ee1b8cba86",
+      "name": "When chat message received",
+      "webhookId": "644ec59d-a277-43d2-bd92-5ac1a7d11a16"
     },
     {
       "parameters": {
-        "rule": {
-          "interval": [
-            {
-              "triggerAtHour": 7
-            }
-          ]
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "你是一個高效、精準、負責任的AI助手。具備對話記憶能力，能理解上下文。\n回答策略：\n-   對於已知事實，立即簡潔回答，避免冗長解釋。\n-   僅在必要時調用工具（如WikipediaSearch），並智能概括結果。\n-   當無法找到明確答案時，簡潔告知用戶，避免臆測。\n可用工具：\n-   WikipediaSearch：查詢百科知識。\n你的首要任務是提供快速、準確、有價值的資訊。"
         }
       },
-      "id": "f3e5bb93-c7c3-44a1-a28e-cc68422cdeb4",
-      "name": "Schedule Trigger",
-      "type": "n8n-nodes-base.scheduleTrigger",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
       "position": [
-        -144,
-        480
-      ],
-      "typeVersion": 1.2
-    },
-    {
-      "parameters": {
-        "content": "## Main workflow loop",
-        "height": 434.88564057365943,
-        "width": 886.4410237965205,
-        "color": 7
-      },
-      "id": "8a09bc9f-921b-4837-9c3a-0534e01bf0c5",
-      "name": "Sticky Note2",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        -208,
+        800,
         208
       ],
-      "typeVersion": 1
+      "id": "1e137bcf-f6d2-423a-aa62-8d780f37b6fc",
+      "name": "AI Agent"
     },
     {
       "parameters": {
-        "resource": "file",
-        "operation": "get",
-        "owner": {
-          "__rl": true,
-          "value": "=bigdog16888",
-          "mode": "name"
-        },
-        "repository": {
-          "__rl": true,
-          "value": "=n8n-backup",
-          "mode": "name"
-        },
-        "filePath": "={{ $json.repo.path }}",
-        "binaryPropertyName": "=data",
-        "additionalParameters": {}
+        "modelName": "models/gemini-2.5-flash-lite",
+        "options": {}
       },
-      "id": "7de24850-1239-4bea-a8c4-9b5e8347364b",
-      "name": "Get file data",
-      "type": "n8n-nodes-base.github",
-      "position": [
-        752,
-        848
-      ],
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
-      "alwaysOutputData": true,
-      "webhookId": "da1f0446-d08a-4905-85af-98593c018457",
+      "position": [
+        432,
+        432
+      ],
+      "id": "a0b2e82e-d8c8-4bdc-9c0f-49cace5e3e5e",
+      "name": "Google Gemini Chat Model",
       "credentials": {
-        "githubApi": {
-          "id": "lwdnJ9dwaBGE6xmR",
-          "name": "GitHub account"
+        "googlePalmApi": {
+          "id": "BhRebVZ9DRCV4K9x",
+          "name": "Google Gemini(PaLM) Api account"
         }
-      },
-      "continueOnFail": true
+      }
     },
     {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "6cf546c5-5737-4dbd-851b-17d68e0a3780",
-              "name": "repo.owner",
-              "type": "string",
-              "value": "bigdog16888"
-            },
-            {
-              "id": "452efa28-2dc6-4ea3-a7a2-c35d100d0382",
-              "name": "repo.name",
-              "type": "string",
-              "value": "n8n-backup"
-            },
-            {
-              "id": "81c4dc54-86bf-4432-a23f-22c7ea831e74",
-              "name": "repo.path",
-              "type": "string",
-              "value": "=workflows/{{ $workflow.id }}.json"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "b74f1feb-8de5-42a4-b3ce-9c266e06c15b",
-      "name": "Globals",
-      "type": "n8n-nodes-base.set",
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "typeVersion": 1.5,
       "position": [
-        528,
-        848
+        576,
+        464
       ],
-      "typeVersion": 3.4
+      "id": "16a18c8f-aa09-43b2-a7a8-21a20c7c0d28",
+      "name": "Redis Chat Memory",
+      "credentials": {
+        "redis": {
+          "id": "wlYktFXxQB8FnYY3",
+          "name": "Redis account"
+        }
+      }
     },
     {
       "parameters": {
-        "inputSource": "passthrough"
+        "cityName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('City', ``, 'string') }}",
+        "language": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Language', ``, 'string') }}"
       },
-      "id": "4631f14f-0d53-4a8d-9e39-286c7860de07",
-      "name": "Execute Workflow Trigger",
-      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "type": "n8n-nodes-base.openWeatherMapTool",
+      "typeVersion": 1,
       "position": [
-        -144,
-        1040
+        704,
+        464
       ],
-      "typeVersion": 1.1
+      "id": "5ca9a03e-3d27-4177-8975-d6bf4e9c9ff7",
+      "name": "OpenWeatherMap",
+      "credentials": {
+        "openWeatherMapApi": {
+          "id": "WtdLhGwtkgEHTzcf",
+          "name": "OpenWeatherMap account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        832,
+        464
+      ],
+      "id": "c5b39177-e7be-4858-af9d-6fded1166514",
+      "name": "Wikipedia"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        960,
+        464
+      ],
+      "id": "7c295636-1ad5-4072-8c9e-ebc297c9f3db",
+      "name": "Calculator"
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "12cad226-e091-4bbb-aed9-a8e01311772c",
-              "name": "tags[0].name",
-              "type": "string",
-              "value": "={{ $('Execute Workflow Trigger').item.json.tags[0].name }}/"
-            }
-          ]
-        },
-        "options": {}
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Text', ``, 'string') }}",
+        "translateTo": "ZH-HANT",
+        "additionalFields": {}
       },
-      "id": "b29a2662-03ea-4315-ad83-004332688e94",
-      "name": "/",
-      "type": "n8n-nodes-base.set",
+      "type": "n8n-nodes-base.deepLTool",
+      "typeVersion": 1,
       "position": [
-        304,
-        704
+        1088,
+        464
       ],
-      "typeVersion": 3.4
+      "id": "daafb9b6-21da-435e-8f6c-cb84cbf0f3b0",
+      "name": "Translate a language in DeepL",
+      "credentials": {
+        "deepLApi": {
+          "id": "k5VPmGahKTUTGmak",
+          "name": "DeepL account"
+        }
+      }
     },
     {
       "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "version": 2,
-                  "leftValue": "",
-                  "caseSensitive": true,
-                  "typeValidation": "strict"
-                },
-                "combinator": "and",
-                "conditions": [
-                  {
-                    "operator": {
-                      "type": "object",
-                      "operation": "exists",
-                      "singleValue": true
-                    },
-                    "leftValue": "={{ $json.tags[0] }}",
-                    "rightValue": ""
-                  }
-                ]
-              },
-              "renameOutput": true,
-              "outputKey": "tag"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "version": 2,
-                  "leftValue": "",
-                  "caseSensitive": true,
-                  "typeValidation": "strict"
-                },
-                "combinator": "and",
-                "conditions": [
-                  {
-                    "id": "2656fbe3-fe35-4770-9c03-9a455ec618e4",
-                    "operator": {
-                      "type": "object",
-                      "operation": "notExists",
-                      "singleValue": true
-                    },
-                    "leftValue": "={{ $json.tags[0] }}",
-                    "rightValue": ""
-                  }
-                ]
-              },
-              "renameOutput": true,
-              "outputKey": "none"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "5e1b84ee-8d14-4ee4-ba8d-ad59b2ca48f0",
-      "name": "tag?",
-      "type": "n8n-nodes-base.switch",
-      "position": [
-        80,
-        848
-      ],
-      "typeVersion": 3.2
-    },
-    {
-      "parameters": {
-        "workflowId": {
-          "__rl": true,
-          "value": "=QyqkD6mg4HWfqsiA",
-          "mode": "id",
-          "cachedResultUrl": "/workflow/=QyqkD6mg4HWfqsiA"
-        },
-        "workflowInputs": {
-          "mappingMode": "defineBelow",
-          "value": {},
-          "matchingColumns": [],
-          "schema": [],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": true
-        },
-        "mode": "each",
-        "options": {}
-      },
-      "id": "a82c91b5-e209-40e1-a5a9-45274940f462",
-      "name": "Call 'Backup'",
-      "type": "n8n-nodes-base.executeWorkflow",
-      "position": [
-        528,
-        384
-      ],
-      "typeVersion": 1.2
-    },
-    {
-      "parameters": {
-        "url": "=https://gionie-n8n-free.hf.space/",
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/reply",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"replyToken\":\"{{ $('Webhook').item.json.body.events[0].replyToken }}\",\n    \"messages\":[\n        {\n            \"type\":\"text\",\n            \"text\": {{ JSON.stringify($json.output) }}\n        }\n    ]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        80,
-        1136
+        1424,
+        240
       ],
-      "id": "883f6666-a0c1-4c1c-b8ac-1d3f9bea1a69",
-      "name": "HTTP Request"
+      "id": "ad4051fc-b75d-4b12-b951-3fe67ff4ddab",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "STyubl0nA6m9Gpfa",
+          "name": "Query Auth account"
+        },
+        "httpHeaderAuth": {
+          "id": "XhkvUemEast99W3j",
+          "name": "Header Auth account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "includeTime": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Include_Current_Time', ``, 'boolean') }}",
+        "outputFieldName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Output_Field_Name', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTimeTool",
+      "typeVersion": 2,
+      "position": [
+        1216,
+        464
+      ],
+      "id": "e584c391-afd1-4571-98b0-6e9b4db848df",
+      "name": "Date & Time"
     }
   ],
   "pinData": {},
@@ -820,20 +293,16 @@
   },
   "shared": [
     {
-      "createdAt": "2025-10-25T02:22:13.248Z",
-      "updatedAt": "2025-10-25T02:22:13.248Z",
+      "createdAt": "2025-10-19T06:58:13.566Z",
+      "updatedAt": "2025-10-19T06:58:13.566Z",
       "role": "workflow:owner",
-      "workflowId": "QyqkD6mg4HWfqsiA",
+      "workflowId": "QSbxoKnRnNBc9Nw4",
       "projectId": "SOgRqgJfaND0d4bJ"
     }
   ],
-  "staticData": {
-    "node:Schedule Trigger": {
-      "recurrenceRules": []
-    }
-  },
+  "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-11-09T01:45:19.906Z",
-  "versionId": "d0345a3b-52d6-47e6-ae7b-c6551ec1e4bc"
+  "updatedAt": "2025-10-22T07:56:13.857Z",
+  "versionId": "ce736f22-6093-4393-a81b-872893da6b9b"
 }

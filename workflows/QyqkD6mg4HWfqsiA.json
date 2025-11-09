@@ -1,153 +1,217 @@
 {
   "active": true,
   "connections": {
-    "Google Gemini Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Text AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Redis Chat Memory": {
-      "ai_memory": [
-        []
-      ]
-    },
-    "OpenWeatherMap": {
-      "ai_tool": [
-        [
-          {
-            "node": "Text AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wikipedia": {
-      "ai_tool": [
-        [
-          {
-            "node": "Text AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Calculator": {
-      "ai_tool": [
-        [
-          {
-            "node": "Text AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Translate a language in DeepL": {
-      "ai_tool": [
-        [
-          {
-            "node": "Text AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Webhook": {
+    "On clicking 'execute'": {
       "main": [
         [
           {
-            "node": "If",
+            "node": "n8n",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Date & Time": {
-      "ai_tool": [
-        [
-          {
-            "node": "Text AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request1": {
+    "n8n": {
       "main": [
         [
           {
-            "node": "HTTP Request2",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "HTTP Request2": {
+    "Get File": {
       "main": [
         [
           {
-            "node": "Parse OCR Output",
+            "node": "Merge Items",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "If": {
+    "If file too large": {
       "main": [
         [
           {
-            "node": "HTTP Request1",
+            "node": "Get File",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Text AI Agent",
+            "node": "Merge Items",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Parse OCR Output": {
+    "Merge Items": {
       "main": [
         [
           {
-            "node": "Set",
+            "node": "isDiffOrNew",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Google Gemini Chat Model1": {
-      "ai_languageModel": [
+    "isDiffOrNew": {
+      "main": [
         [
           {
-            "node": "Image AI Agent",
-            "type": "ai_languageModel",
+            "node": "Check Status",
+            "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Text AI Agent": {
+    "Check Status": {
       "main": [
         [
+          {
+            "node": "Same file - Do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "File is different",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "File is new",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Same file - Do nothing": {
+      "main": [
+        [
+          {
+            "node": "Return",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "File is different": {
+      "main": [
+        [
+          {
+            "node": "Edit existing file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "File is new": {
+      "main": [
+        [
+          {
+            "node": "Create new file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create new file": {
+      "main": [
+        [
+          {
+            "node": "Return",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit existing file": {
+      "main": [
+        [
+          {
+            "node": "Return",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Call 'Backup'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "n8n",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get file data": {
+      "main": [
+        [
+          {
+            "node": "If file too large",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Globals": {
+      "main": [
+        [
+          {
+            "node": "Get file data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Merge Items",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "tag?",
+            "type": "main",
+            "index": 0
+          },
           {
             "node": "HTTP Request",
             "type": "main",
@@ -156,651 +220,620 @@
         ]
       ]
     },
-    "Image AI Agent": {
+    "/": {
       "main": [
         [
           {
-            "node": "Code",
+            "node": "Globals",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Code": {
+    "tag?": {
       "main": [
         [
           {
-            "node": "HTTP Request3",
+            "node": "/",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Globals",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Set": {
+    "Call 'Backup'": {
       "main": [
         [
           {
-            "node": "Image AI Agent",
+            "node": "Loop Over Items",
             "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Brave": {
-      "ai_tool": [
-        [
-          {
-            "node": "Text AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Simple Memory": {
-      "ai_memory": [
-        [
-          {
-            "node": "Image AI Agent",
-            "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Simple Memory1": {
-      "ai_memory": [
-        [
-          {
-            "node": "Text AI Agent",
-            "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "SearXNG": {
-      "ai_tool": [
-        [
-          {
-            "node": "Text AI Agent",
-            "type": "ai_tool",
             "index": 0
           }
         ]
       ]
     }
   },
-  "createdAt": "2025-10-20T10:29:20.515Z",
-  "id": "OlmUnWHBwAwUhvbX",
+  "createdAt": "2025-10-25T02:22:13.248Z",
+  "id": "QyqkD6mg4HWfqsiA",
   "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Online",
+  "name": "Backup",
   "nodes": [
     {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [
-        -832,
-        -264
-      ],
-      "id": "d85367e1-1ace-4f6f-a7c2-18bbb319922c",
-      "name": "Google Gemini Chat Model",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "BhRebVZ9DRCV4K9x",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "={{ $json.body.events[0].source.userId }}",
-        "contextWindowLength": 15
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
-      "typeVersion": 1.5,
-      "position": [
-        -1280,
-        -160
-      ],
-      "id": "a1e76dca-fbc9-4f40-a02a-07375cdc968b",
-      "name": "Redis Chat Memory",
-      "credentials": {
-        "redis": {
-          "id": "wlYktFXxQB8FnYY3",
-          "name": "Redis account"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "cityName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('City', ``, 'string') }}",
-        "language": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Language', ``, 'string') }}"
-      },
-      "type": "n8n-nodes-base.openWeatherMapTool",
-      "typeVersion": 1,
-      "position": [
-        -576,
-        -264
-      ],
-      "id": "20d26101-7b0b-4692-aaed-f039299649f8",
-      "name": "OpenWeatherMap",
-      "credentials": {
-        "openWeatherMapApi": {
-          "id": "WtdLhGwtkgEHTzcf",
-          "name": "OpenWeatherMap account"
-        }
-      }
-    },
-    {
       "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
-      "typeVersion": 1,
+      "id": "d6b4a645-99bc-4836-9f8e-9750a267da3e",
+      "name": "On clicking 'execute'",
+      "type": "n8n-nodes-base.manualTrigger",
       "position": [
-        -448,
-        -264
+        -144,
+        288
       ],
-      "id": "975ada8d-5246-489a-bce3-320e27f72549",
-      "name": "Wikipedia"
-    },
-    {
-      "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
-      "typeVersion": 1,
-      "position": [
-        -320,
-        -264
-      ],
-      "id": "00280217-9a59-450a-b007-9a04e0d28512",
-      "name": "Calculator"
+      "typeVersion": 1
     },
     {
       "parameters": {
-        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Text', ``, 'string') }}",
-        "translateTo": "ZH-HANT",
-        "additionalFields": {}
+        "content": "## Subworkflow",
+        "height": 767,
+        "width": 2547,
+        "color": 6
       },
-      "type": "n8n-nodes-base.deepLTool",
-      "typeVersion": 1,
+      "id": "bb695739-8d44-4f8e-b544-d1bab119d026",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -192,
-        -264
+        -240,
+        448
       ],
-      "id": "15f68ae9-fa28-431c-af32-906065ca31fd",
-      "name": "Translate a language in DeepL",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "filters": {},
+        "requestOptions": {}
+      },
+      "id": "a96c0460-3afc-4a1a-a9d0-481c1fa8b172",
+      "name": "n8n",
+      "type": "n8n-nodes-base.n8n",
+      "position": [
+        80,
+        384
+      ],
+      "typeVersion": 1,
       "credentials": {
-        "deepLApi": {
-          "id": "k5VPmGahKTUTGmak",
-          "name": "DeepL account"
+        "n8nApi": {
+          "id": "F0ftDdtH8yxaZJZi",
+          "name": "n8n account"
         }
       }
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "callback",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
-      "position": [
-        -1280,
-        -636
-      ],
-      "id": "5681d773-5db4-4059-aec3-4e107bad7b89",
-      "name": "Webhook",
-      "webhookId": "21c6171d-a9e9-4161-b787-1738d6d9153c"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.line.me/v2/bot/message/reply",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n    \"replyToken\":\"{{ $('Webhook').item.json.body.events[0].replyToken }}\",\n    \"messages\":[\n        {\n            \"type\":\"text\",\n            \"text\": {{ JSON.stringify($json.output) }}\n        }\n    ]\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        400,
-        -488
-      ],
-      "id": "92dc270f-0ed8-4bd9-b906-71aeeb6d11b8",
-      "name": "HTTP Request",
-      "credentials": {
-        "httpQueryAuth": {
-          "id": "STyubl0nA6m9Gpfa",
-          "name": "Query Auth account"
-        },
-        "httpHeaderAuth": {
-          "id": "XhkvUemEast99W3j",
-          "name": "Header Auth account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "includeTime": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Include_Current_Time', ``, 'boolean') }}",
-        "outputFieldName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Output_Field_Name', ``, 'string') }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.dateTimeTool",
-      "typeVersion": 2,
-      "position": [
-        -64,
-        -264
-      ],
-      "id": "ad9e7241-ea17-4c83-8164-458dcc351e0c",
-      "name": "Date & Time"
-    },
-    {
-      "parameters": {
-        "url": "=https://api-data.line.me/v2/bot/message/{{ $json.body.events[0].message.id }}/content",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Authorization",
-              "value": "Bearer AlaeI3rhCXsNjvpId/OCherfCv7cakAVoMRqDtTeNcsTIjEm4wMROeWuae9tittYNeNQHQhO9RTB218hNcqNVhwzYqF+si1aabauaTXDsvByXKx0qPFaDUxdcHfvW2RR5PPnHJRW8lDUMdtB32uPzQdB04t89/1O/w1cDnyilFU="
-            }
-          ]
-        },
-        "options": {
-          "response": {
-            "response": {
-              "responseFormat": "file",
-              "outputPropertyName": "line_image_data"
-            }
-          }
-        }
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -328,
-        -784
-      ],
-      "id": "d7ee5948-b2b8-41e3-b48b-34136c5100aa",
-      "name": "HTTP Request1"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://gionie-my-fastapi-paddleocr.hf.space/ocr",
-        "sendBody": true,
-        "contentType": "multipart-form-data",
-        "bodyParameters": {
-          "parameters": [
-            {
-              "parameterType": "formBinaryData",
-              "name": "file",
-              "inputDataFieldName": "line_image_data"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        400,
-        -784
-      ],
-      "id": "57d88564-d5b8-4cc3-8a51-0d942187f79f",
-      "name": "HTTP Request2"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.line.me/v2/bot/message/reply",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ $json }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        1648,
-        -784
-      ],
-      "id": "3a06ef5e-cfd6-43d3-9542-3023dca85d8b",
-      "name": "HTTP Request3",
-      "credentials": {
-        "httpQueryAuth": {
-          "id": "STyubl0nA6m9Gpfa",
-          "name": "Query Auth account"
-        },
-        "httpHeaderAuth": {
-          "id": "XhkvUemEast99W3j",
-          "name": "Header Auth account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "42ed21c2-7a41-4b66-a8e0-84daef8d7640",
-              "leftValue": "={{ $json.body.events[0].message.type }}",
-              "rightValue": "image",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        -1056,
-        -636
-      ],
-      "id": "d543af01-e996-47b7-8c85-37b13f62e042",
-      "name": "If"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Get the OCR response\nconst ocrResponse = $input.all()[0].json;\n\n// Extract and combine all text\nconst extractedTexts = ocrResponse.extracted_text || [];\nconst combinedText = extractedTexts.map(item => item.text).join(' ');\n\n// Get replyToken from the webhook node (HTTP Request1)\nconst webhookData = $node[\"Webhook\"].json;\nconst replyToken = webhookData.body.events[0].replyToken;\n\nreturn [{\n  json: {\n    fullText: combinedText,\n    totalLines: ocrResponse.total_lines || 0,\n    texts: extractedTexts,\n    replyToken: replyToken\n  }\n}];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        624,
-        -784
-      ],
-      "id": "4c691ed5-0fbb-47d2-9539-493b05eccb63",
-      "name": "Parse OCR Output"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [
-        1080,
-        -560
-      ],
-      "id": "ae48ce65-7067-4fee-9037-ab517f3c5910",
-      "name": "Google Gemini Chat Model1",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "BhRebVZ9DRCV4K9x",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "={{ $json.body.events[0].message.text }}",
-        "options": {
-          "systemMessage": "繁體中文AI助手。**永遠中文回答**。\n\n工具順序：\n- 天氣→OpenWeatherMap (使用英文城市名)\n- 計算→Calculator\n- 翻譯→DeepL\n- 所有你無法回答的問題資料查詢：\n  1. Wikipedia（快速事實）\n  2. SearXNG（其餘一般搜尋）\n  3. Brave（需要2個答案來交叉比對時、當其他失敗時）\n\n搜尋策略：\n- 如果 Wikipedia 失敗 → 立即嘗試 SearXNG\n- 如果 SearXNG 也失敗 → 使用 Brave Search\n- 搜尋關鍵字要簡潔（1-6 個詞）\n- 盡量使用英文搜尋以獲得更好結果\n- 盡量得到使用兩種以上答案交叉比對真實性\n\n重要規則：\n1. 不確定的問題→**立即使用搜尋工具**，禁止建議用戶自己查\n2. 禁止重複用戶的問題\n3. 禁止說\"我不知道\"而不搜尋\n4. 回答用中英交叉得到答案\n5. 答案用你本身知識+Wikipedia→SearXNG(再加Brave如有需要)交叉比對確認無誤\n6. 工具失敗時不要停止，嘗試下一個工具\n\n找到資訊後用現有答案交叉比對確認無誤簡潔概括，用繁體中文回答。",
-          "maxIterations": 10
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2.2,
-      "position": [
-        -392,
-        -488
-      ],
-      "id": "39acfd02-520e-4a02-94be-c7a0e52b5657",
-      "name": "Text AI Agent"
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "=={{ $json.prompt }}",
-        "options": {
-          "systemMessage": "發票OCR解析，表格：日期|地點|重量|金額。修正錯字，簡潔準確。"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2.2,
-      "position": [
-        1072,
-        -784
-      ],
-      "id": "dfc66664-c15c-4816-91c4-8fb4cd5b8721",
-      "name": "Image AI Agent"
-    },
-    {
-      "parameters": {
-        "jsCode": "const aiResponse = $input.first().json.output;\n// 改成你的 Set 節點實際名稱！檢查節點上方顯示的名字\nconst replyToken = $('Set').first().json.replyToken;\n\nreturn {\n  json: {\n    replyToken: replyToken,\n    messages: [{ type: \"text\", text: aiResponse }]\n  }\n};"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1424,
-        -784
-      ],
-      "id": "12d076c0-936b-4096-a7a0-fcffddcf3439",
-      "name": "Code"
     },
     {
       "parameters": {
         "assignments": {
           "assignments": [
             {
-              "id": "33043313-d11a-41a5-ba01-00adc5fd1904",
-              "name": "prompt",
-              "value": "=你是發票處理專家AI\nOCR發票：{{ $json.fullText }}\n整理成：日期|地點|重量|金額\n修正園→圓，<0.6標⚠️\n收到的OCR資料包含手寫中文發票。任務：\n1. 從OCR結果找出：送貨日期、送貨地點（起終點）、載運重量、金額\n2. 修正常見錯誤：\n   - \"园\" → \"圓\" \n   - 數字混淆（0/O, 1/I等）\n3. 低信心度(<0.6)項目標註⚠️\n\n輸出格式（表格）：\n\n送貨日期 | 送貨地點 | 載運重量 | 金額\n8/6 | 岡山 全聯 | 13.5板 | 124540\n",
-              "type": "string"
-            },
-            {
-              "id": "4a64c6e7-6118-4066-ad33-c3b442763033",
-              "name": "replyToken",
-              "value": "={{ $json.replyToken }}",
-              "type": "string"
+              "id": "8d513345-6484-431f-afb7-7cf045c90f4f",
+              "name": "Done",
+              "type": "boolean",
+              "value": true
             }
           ]
         },
         "options": {}
       },
+      "id": "6a59022d-5217-4ec4-8d11-61fcd56c41fa",
+      "name": "Return",
       "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
       "position": [
-        848,
-        -784
+        2544,
+        848
       ],
-      "id": "c4f6dd39-a01c-47ef-b9d6-660b4ad9c4e3",
-      "name": "Set"
+      "typeVersion": 3.3
     },
     {
       "parameters": {
-        "toolDescription": "Brave Search online tool",
-        "url": "https://api.search.brave.com/res/v1/web/search",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
+        "url": "=https://api.github.com/repos/bigdog16888/n8n-backup/contents/{{ $json.repo.path }}",
+        "options": {}
+      },
+      "id": "ba77a05f-8258-440d-a021-79063db55ad2",
+      "name": "Get File",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1200,
+        704
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 1,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
             {
-              "name": "=q",
-              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', ``, 'string') }}"
+              "id": "45ce825e-9fa6-430c-8931-9aaf22c42585",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.content }}",
+              "rightValue": ""
             },
             {
-              "name": "count",
-              "value": "3"
-            }
-          ]
-        },
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "=X-Subscription-Token",
-              "value": "=BSAbIjHxTHqAcA4Mz7kEJ-22QINZy7H"
-            },
-            {
-              "name": "Accept",
-              "value": "application/json"
+              "id": "9619a55f-7fb1-4f24-b1a7-7aeb82365806",
+              "operator": {
+                "type": "string",
+                "operation": "notExists",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.error }}",
+              "rightValue": ""
             }
           ]
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.httpRequestTool",
+      "id": "9011f2c8-72b8-4201-8769-0177255cc63b",
+      "name": "If file too large",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        976,
+        848
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {},
+      "id": "2b88ddda-91a7-4c27-9331-5ee425e13592",
+      "name": "Merge Items",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        1424,
+        880
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "jsCode": "const orderJsonKeys = (jsonObj) => {\n  const ordered = {};\n  Object.keys(jsonObj).sort().forEach(key => {\n    ordered[key] = jsonObj[key];\n  });\n  return ordered;\n}\n\n// Check if file returned with content\nif (Object.keys($input.all()[0].json).includes(\"content\")) {\n  // Decode base64 content and parse JSON\n  const origWorkflow = JSON.parse(Buffer.from($input.all()[0].json.content, 'base64').toString());\n  const n8nWorkflow = $input.all()[1].json;\n  \n  // Order JSON objects\n  const orderedOriginal = orderJsonKeys(origWorkflow);\n  const orderedActual = orderJsonKeys(n8nWorkflow);\n\n  // Determine difference\n  if (JSON.stringify(orderedOriginal) === JSON.stringify(orderedActual)) {\n    $input.all()[0].json.github_status = \"same\";\n  } else {\n    $input.all()[0].json.github_status = \"different\";\n    $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n  }\n  $input.all()[0].json.content_decoded = orderedOriginal;\n// No file returned / new workflow\n} else if (Object.keys($input.all()[0].json).includes(\"data\")) {\n  const origWorkflow = JSON.parse($input.all()[0].json.data);\n  const n8nWorkflow = $input.all()[1].json;\n  \n  // Order JSON objects\n  const orderedOriginal = orderJsonKeys(origWorkflow);\n  const orderedActual = orderJsonKeys(n8nWorkflow);\n\n  // Determine difference\n  if (JSON.stringify(orderedOriginal) === JSON.stringify(orderedActual)) {\n    $input.all()[0].json.github_status = \"same\";\n  } else {\n    $input.all()[0].json.github_status = \"different\";\n    $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n  }\n  $input.all()[0].json.content_decoded = orderedOriginal;\n\n} else {\n  // Order JSON object\n  const n8nWorkflow = $input.all()[1].json;\n  const orderedActual = orderJsonKeys(n8nWorkflow);\n  \n  // Proper formatting\n  $input.all()[0].json.github_status = \"new\";\n  $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n}\n\n// Return items\nreturn $input.all();"
+      },
+      "id": "5ff5aa25-2c4f-4042-af8d-ae7a89e8b8c5",
+      "name": "isDiffOrNew",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1648,
+        880
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{$json.github_status}}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "same"
+            },
+            {
+              "value2": "different",
+              "output": 1
+            },
+            {
+              "value2": "new",
+              "output": 2
+            }
+          ]
+        }
+      },
+      "id": "f9c7c3b9-427d-4ae8-b361-d7f0d4c5066c",
+      "name": "Check Status",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        1872,
+        848
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "c49823ec-26bd-4959-8741-a19246180f27",
+      "name": "Same file - Do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        2320,
+        736
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "6341d9f5-8f0b-4579-b48a-5edec3aa2f61",
+      "name": "File is different",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        2096,
+        928
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "ddbb0b19-3a3e-4a0f-b2d6-3a6a562bb695",
+      "name": "File is new",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        2096,
+        1120
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Globals').item.json.repo.owner }}"
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Globals').item.json.repo.name }}"
+        },
+        "filePath": "={{ $('Globals').item.json.repo.path }}{{$('Execute Workflow Trigger').first().json.id}}.json",
+        "fileContent": "={{$('isDiffOrNew').item.json[\"n8n_data_stringy\"]}}",
+        "commitMessage": "={{$('Execute Workflow Trigger').first().json.name}} ({{$json.github_status}})"
+      },
+      "id": "66d42aaf-5307-48da-9f52-e020ab6bec5a",
+      "name": "Create new file",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        2320,
+        1120
+      ],
+      "typeVersion": 1,
+      "webhookId": "b675514d-fb54-4180-8e91-6022781faab6",
+      "credentials": {
+        "githubApi": {
+          "id": "lwdnJ9dwaBGE6xmR",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Globals').item.json.repo.owner }}"
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Globals').item.json.repo.name }}"
+        },
+        "filePath": "={{ $('Globals').item.json.repo.path }}",
+        "fileContent": "={{$('isDiffOrNew').item.json[\"n8n_data_stringy\"]}}",
+        "commitMessage": "= {{ $json.path }}({{$json.github_status}})"
+      },
+      "id": "47db0169-754a-453f-8d0d-06a8ada98784",
+      "name": "Edit existing file",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        2320,
+        928
+      ],
+      "typeVersion": 1,
+      "webhookId": "4b63a6dd-510f-46e0-91e2-9c10ac4d5a49",
+      "credentials": {
+        "githubApi": {
+          "id": "lwdnJ9dwaBGE6xmR",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "307743f6-88ae-42e0-9406-929f5e97be9a",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "position": [
+        304,
+        384
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 7
+            }
+          ]
+        }
+      },
+      "id": "f3e5bb93-c7c3-44a1-a28e-cc68422cdeb4",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        -144,
+        480
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "content": "## Main workflow loop",
+        "height": 434.88564057365943,
+        "width": 886.4410237965205,
+        "color": 7
+      },
+      "id": "8a09bc9f-921b-4837-9c3a-0534e01bf0c5",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -208,
+        208
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "=bigdog16888",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "=n8n-backup",
+          "mode": "name"
+        },
+        "filePath": "={{ $json.repo.path }}",
+        "binaryPropertyName": "=data",
+        "additionalParameters": {}
+      },
+      "id": "7de24850-1239-4bea-a8c4-9b5e8347364b",
+      "name": "Get file data",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        752,
+        848
+      ],
+      "typeVersion": 1,
+      "alwaysOutputData": true,
+      "webhookId": "da1f0446-d08a-4905-85af-98593c018457",
+      "credentials": {
+        "githubApi": {
+          "id": "lwdnJ9dwaBGE6xmR",
+          "name": "GitHub account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6cf546c5-5737-4dbd-851b-17d68e0a3780",
+              "name": "repo.owner",
+              "type": "string",
+              "value": "bigdog16888"
+            },
+            {
+              "id": "452efa28-2dc6-4ea3-a7a2-c35d100d0382",
+              "name": "repo.name",
+              "type": "string",
+              "value": "n8n-backup"
+            },
+            {
+              "id": "81c4dc54-86bf-4432-a23f-22c7ea831e74",
+              "name": "repo.path",
+              "type": "string",
+              "value": "=workflows/{{ $workflow.id }}.json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b74f1feb-8de5-42a4-b3ce-9c266e06c15b",
+      "name": "Globals",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        528,
+        848
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "4631f14f-0d53-4a8d-9e39-286c7860de07",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -144,
+        1040
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "12cad226-e091-4bbb-aed9-a8e01311772c",
+              "name": "tags[0].name",
+              "type": "string",
+              "value": "={{ $('Execute Workflow Trigger').item.json.tags[0].name }}/"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b29a2662-03ea-4315-ad83-004332688e94",
+      "name": "/",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        304,
+        704
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "leftValue": "={{ $json.tags[0] }}",
+                    "rightValue": ""
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "tag"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "2656fbe3-fe35-4770-9c03-9a455ec618e4",
+                    "operator": {
+                      "type": "object",
+                      "operation": "notExists",
+                      "singleValue": true
+                    },
+                    "leftValue": "={{ $json.tags[0] }}",
+                    "rightValue": ""
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "none"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5e1b84ee-8d14-4ee4-ba8d-ad59b2ca48f0",
+      "name": "tag?",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        80,
+        848
+      ],
+      "typeVersion": 3.2
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "=QyqkD6mg4HWfqsiA",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/=QyqkD6mg4HWfqsiA"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {}
+      },
+      "id": "a82c91b5-e209-40e1-a5a9-45274940f462",
+      "name": "Call 'Backup'",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "position": [
+        528,
+        384
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "url": "=https://gionie-n8n-free.hf.space/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        64,
-        -264
+        80,
+        1136
       ],
-      "id": "4f2aa113-874e-42db-9895-38884b405e7c",
-      "name": "Brave",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "XhkvUemEast99W3j",
-          "name": "Header Auth account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "={{ $json.body.events[0].source.userId }}"
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        1208,
-        -560
-      ],
-      "id": "8e5a75bc-b7ee-4ea0-8278-fcc22afe4fe4",
-      "name": "Simple Memory"
-    },
-    {
-      "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "={{ $json.body.events[0].source.userId }}",
-        "contextWindowLength": 15
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        -704,
-        -264
-      ],
-      "id": "57721f3d-4641-409c-985a-add1925a5eb8",
-      "name": "Simple Memory1"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolSearXng",
-      "typeVersion": 1,
-      "position": [
-        192,
-        -264
-      ],
-      "id": "80066452-7fac-46a5-9c46-ec5eca1635db",
-      "name": "SearXNG",
-      "credentials": {
-        "searXngApi": {
-          "id": "VMYqRADbkXv0ZfDl",
-          "name": "SearXNG account"
-        }
-      }
+      "id": "883f6666-a0c1-4c1c-b8ac-1d3f9bea1a69",
+      "name": "HTTP Request"
     }
   ],
-  "pinData": {
-    "Webhook": [
-      {
-        "json": {
-          "headers": {
-            "x-forwarded-for": "147.92.150.197",
-            "x-forwarded-proto": "https",
-            "x-forwarded-port": "443",
-            "host": "gionie-n8n-free.hf.space",
-            "x-amzn-trace-id": "Root=1-68fb6420-0d83618b5664c35e7df42f7b",
-            "content-length": "581",
-            "x-line-signature": "BGLceKc4CCG6Cx3NrZqY1ccWj+JiApWJtk9+xds56C4=",
-            "content-type": "application/json; charset=utf-8",
-            "user-agent": "LineBotWebhook/2.0",
-            "x-request-id": "DLC5Xm, DLC5Xm",
-            "x-direct-url": "https://gionie-n8n-free.hf.space/--replicas/zxr8d/webhook/callback"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "destination": "Ua5a2f6a998c71ce952b6621833b460ed",
-            "events": [
-              {
-                "type": "message",
-                "message": {
-                  "type": "image",
-                  "id": "584642904933531686",
-                  "quoteToken": "frnMYzTuDcW3zq2uWmId8HjU5T3SQwxrKlBdfoUljqFrm4eS358yqSB-yJhliimuif8wDNIQHVGn6nw8nbCCnwLt2cKCcDCEqbdIfNNN_ET5YKppl9nfmCDbr19YV_SVpXjJ3rrB_z8Am_sxcTyNUQ",
-                  "contentProvider": {
-                    "type": "line"
-                  }
-                },
-                "webhookEventId": "01K8AZY6QX49661M1429MB6MA1",
-                "deliveryContext": {
-                  "isRedelivery": false
-                },
-                "timestamp": 1761305631147,
-                "source": {
-                  "type": "user",
-                  "userId": "U0e8f5ec2c86ea8542b4e67cc947c0f20"
-                },
-                "replyToken": "629a27a98f9f49a6af13f225dceaa873",
-                "mode": "active"
-              }
-            ]
-          },
-          "webhookUrl": "https://Gionie-n8n-free.hf.space/webhook/callback",
-          "executionMode": "production"
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1"
   },
   "shared": [
     {
-      "createdAt": "2025-10-20T10:29:20.515Z",
-      "updatedAt": "2025-10-20T10:29:20.515Z",
+      "createdAt": "2025-10-25T02:22:13.248Z",
+      "updatedAt": "2025-10-25T02:22:13.248Z",
       "role": "workflow:owner",
-      "workflowId": "OlmUnWHBwAwUhvbX",
+      "workflowId": "QyqkD6mg4HWfqsiA",
       "projectId": "SOgRqgJfaND0d4bJ"
     }
   ],
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-25T17:40:45.353Z",
-  "versionId": "97082689-b3df-4ee9-a449-9670743c09bf"
+  "updatedAt": "2025-11-09T01:45:19.906Z",
+  "versionId": "d0345a3b-52d6-47e6-ae7b-c6551ec1e4bc"
 }

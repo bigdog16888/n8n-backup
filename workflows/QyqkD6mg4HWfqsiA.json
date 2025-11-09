@@ -1,11 +1,122 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
-    "When chat message received": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Text AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Chat Memory": {
+      "ai_memory": [
+        []
+      ]
+    },
+    "OpenWeatherMap": {
+      "ai_tool": [
+        [
+          {
+            "node": "Text AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "Text AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "Text AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Translate a language in DeepL": {
+      "ai_tool": [
+        [
+          {
+            "node": "Text AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
       "main": [
         [
           {
-            "node": "Read/Write Files from Disk",
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "ai_tool": [
+        [
+          {
+            "node": "Text AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "Parse OCR Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Text AI Agent",
             "type": "main",
             "index": 0
           }
@@ -29,6 +140,17 @@
           {
             "node": "Image AI Agent",
             "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text AI Agent": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
             "index": 0
           }
         ]
@@ -67,6 +189,17 @@
         ]
       ]
     },
+    "Brave": {
+      "ai_tool": [
+        [
+          {
+            "node": "Text AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Simple Memory": {
       "ai_memory": [
         [
@@ -78,52 +211,257 @@
         ]
       ]
     },
-    "HTTP Request2": {
-      "main": [
+    "Simple Memory1": {
+      "ai_memory": [
         [
           {
-            "node": "Parse OCR Output",
-            "type": "main",
+            "node": "Text AI Agent",
+            "type": "ai_memory",
             "index": 0
           }
         ]
       ]
     },
-    "Read/Write Files from Disk": {
-      "main": [
+    "SearXNG": {
+      "ai_tool": [
         [
           {
-            "node": "HTTP Request2",
-            "type": "main",
+            "node": "Text AI Agent",
+            "type": "ai_tool",
             "index": 0
           }
         ]
       ]
     }
   },
-  "createdAt": "2025-10-19T07:49:43.783Z",
-  "id": "75LuP8uvdbaoncct",
+  "createdAt": "2025-10-20T10:29:20.515Z",
+  "id": "OlmUnWHBwAwUhvbX",
   "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "OCR",
+  "name": "Online",
   "nodes": [
     {
       "parameters": {
-        "options": {
-          "allowFileUploads": true
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -832,
+        -264
+      ],
+      "id": "d85367e1-1ace-4f6f-a7c2-18bbb319922c",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "BhRebVZ9DRCV4K9x",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.events[0].source.userId }}",
+        "contextWindowLength": 15
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "typeVersion": 1.5,
+      "position": [
+        -1280,
+        -160
+      ],
+      "id": "a1e76dca-fbc9-4f40-a02a-07375cdc968b",
+      "name": "Redis Chat Memory",
+      "credentials": {
+        "redis": {
+          "id": "wlYktFXxQB8FnYY3",
+          "name": "Redis account"
         }
       },
-      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
-      "typeVersion": 1.3,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "cityName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('City', ``, 'string') }}",
+        "language": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Language', ``, 'string') }}"
+      },
+      "type": "n8n-nodes-base.openWeatherMapTool",
+      "typeVersion": 1,
       "position": [
-        144,
-        0
+        -576,
+        -264
       ],
-      "id": "093fd49f-dd09-487d-9a2f-81c5a7982e9d",
-      "name": "When chat message received",
-      "webhookId": "b67d23af-8984-4d76-8c91-6aa7356244a1"
+      "id": "20d26101-7b0b-4692-aaed-f039299649f8",
+      "name": "OpenWeatherMap",
+      "credentials": {
+        "openWeatherMapApi": {
+          "id": "WtdLhGwtkgEHTzcf",
+          "name": "OpenWeatherMap account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        -264
+      ],
+      "id": "975ada8d-5246-489a-bce3-320e27f72549",
+      "name": "Wikipedia"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -264
+      ],
+      "id": "00280217-9a59-450a-b007-9a04e0d28512",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Text', ``, 'string') }}",
+        "translateTo": "ZH-HANT",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.deepLTool",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        -264
+      ],
+      "id": "15f68ae9-fa28-431c-af32-906065ca31fd",
+      "name": "Translate a language in DeepL",
+      "credentials": {
+        "deepLApi": {
+          "id": "k5VPmGahKTUTGmak",
+          "name": "DeepL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "callback",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1280,
+        -636
+      ],
+      "id": "5681d773-5db4-4059-aec3-4e107bad7b89",
+      "name": "Webhook",
+      "webhookId": "21c6171d-a9e9-4161-b787-1738d6d9153c"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/reply",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"replyToken\":\"{{ $('Webhook').item.json.body.events[0].replyToken }}\",\n    \"messages\":[\n        {\n            \"type\":\"text\",\n            \"text\": {{ JSON.stringify($json.output) }}\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        -488
+      ],
+      "id": "92dc270f-0ed8-4bd9-b906-71aeeb6d11b8",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "STyubl0nA6m9Gpfa",
+          "name": "Query Auth account"
+        },
+        "httpHeaderAuth": {
+          "id": "XhkvUemEast99W3j",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "includeTime": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Include_Current_Time', ``, 'boolean') }}",
+        "outputFieldName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Output_Field_Name', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTimeTool",
+      "typeVersion": 2,
+      "position": [
+        -64,
+        -264
+      ],
+      "id": "ad9e7241-ea17-4c83-8164-458dcc351e0c",
+      "name": "Date & Time"
+    },
+    {
+      "parameters": {
+        "url": "=https://api-data.line.me/v2/bot/message/{{ $json.body.events[0].message.id }}/content",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer AlaeI3rhCXsNjvpId/OCherfCv7cakAVoMRqDtTeNcsTIjEm4wMROeWuae9tittYNeNQHQhO9RTB218hNcqNVhwzYqF+si1aabauaTXDsvByXKx0qPFaDUxdcHfvW2RR5PPnHJRW8lDUMdtB32uPzQdB04t89/1O/w1cDnyilFU="
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "line_image_data"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -328,
+        -784
+      ],
+      "id": "d7ee5948-b2b8-41e3-b48b-34136c5100aa",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://gionie-my-fastapi-paddleocr.hf.space/ocr",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "line_image_data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        -784
+      ],
+      "id": "57d88564-d5b8-4cc3-8a51-0d942187f79f",
+      "name": "HTTP Request2"
     },
     {
       "parameters": {
@@ -139,10 +477,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1840,
-        0
+        1648,
+        -784
       ],
-      "id": "761f5bad-d0a7-44d7-b3e9-4627fd138007",
+      "id": "3a06ef5e-cfd6-43d3-9542-3023dca85d8b",
       "name": "HTTP Request3",
       "credentials": {
         "httpQueryAuth": {
@@ -153,20 +491,53 @@
           "id": "XhkvUemEast99W3j",
           "name": "Header Auth account"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
-        "jsCode": "// Debug: Log the entire input to see structure\nconst allInputs = $input.all();\nconsole.log('All inputs:', JSON.stringify(allInputs, null, 2));\n\nconst ocrResponse = allInputs[0].json;\nconsole.log('OCR Response:', JSON.stringify(ocrResponse, null, 2));\n\nreturn [{\n  json: {\n    debug: ocrResponse,\n    fullInput: allInputs\n  }\n}];"
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "42ed21c2-7a41-4b66-a8e0-84daef8d7640",
+              "leftValue": "={{ $json.body.events[0].message.type }}",
+              "rightValue": "image",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1056,
+        -636
+      ],
+      "id": "d543af01-e996-47b7-8c85-37b13f62e042",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the OCR response\nconst ocrResponse = $input.all()[0].json;\n\n// Extract and combine all text\nconst extractedTexts = ocrResponse.extracted_text || [];\nconst combinedText = extractedTexts.map(item => item.text).join(' ');\n\n// Get replyToken from the webhook node (HTTP Request1)\nconst webhookData = $node[\"Webhook\"].json;\nconst replyToken = webhookData.body.events[0].replyToken;\n\nreturn [{\n  json: {\n    fullText: combinedText,\n    totalLines: ocrResponse.total_lines || 0,\n    texts: extractedTexts,\n    replyToken: replyToken\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        816,
-        0
+        624,
+        -784
       ],
-      "id": "52bbbea4-904d-4f79-bc21-51d74634a6b9",
+      "id": "4c691ed5-0fbb-47d2-9539-493b05eccb63",
       "name": "Parse OCR Output"
     },
     {
@@ -176,10 +547,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        1272,
-        224
+        1080,
+        -560
       ],
-      "id": "537db146-48c7-4a73-bc12-41a97bae6463",
+      "id": "ae48ce65-7067-4fee-9037-ab517f3c5910",
       "name": "Google Gemini Chat Model1",
       "credentials": {
         "googlePalmApi": {
@@ -187,6 +558,24 @@
           "name": "Google Gemini(PaLM) Api account"
         }
       }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.events[0].message.text }}",
+        "options": {
+          "systemMessage": "繁體中文AI助手。**永遠中文回答**。\n\n工具順序：\n- 天氣→OpenWeatherMap (使用英文城市名)\n- 計算→Calculator\n- 翻譯→DeepL\n- 所有你無法回答的問題資料查詢：\n  1. Wikipedia（快速事實）\n  2. SearXNG（其餘一般搜尋）\n  3. Brave（需要2個答案來交叉比對時、當其他失敗時）\n\n搜尋策略：\n- 如果 Wikipedia 失敗 → 立即嘗試 SearXNG\n- 如果 SearXNG 也失敗 → 使用 Brave Search\n- 搜尋關鍵字要簡潔（1-6 個詞）\n- 盡量使用英文搜尋以獲得更好結果\n- 盡量得到使用兩種以上答案交叉比對真實性\n\n重要規則：\n1. 不確定的問題→**立即使用搜尋工具**，禁止建議用戶自己查\n2. 禁止重複用戶的問題\n3. 禁止說\"我不知道\"而不搜尋\n4. 回答用中英交叉得到答案\n5. 答案用你本身知識+Wikipedia→SearXNG(再加Brave如有需要)交叉比對確認無誤\n6. 工具失敗時不要停止，嘗試下一個工具\n\n找到資訊後用現有答案交叉比對確認無誤簡潔概括，用繁體中文回答。",
+          "maxIterations": 10
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -392,
+        -488
+      ],
+      "id": "39acfd02-520e-4a02-94be-c7a0e52b5657",
+      "name": "Text AI Agent"
     },
     {
       "parameters": {
@@ -199,25 +588,24 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        1264,
-        0
+        1072,
+        -784
       ],
-      "id": "9f308a84-6216-4f7c-9916-b81f444d67f7",
+      "id": "dfc66664-c15c-4816-91c4-8fb4cd5b8721",
       "name": "Image AI Agent"
     },
     {
       "parameters": {
-        "jsCode": "// Get the AI response from Image AI Agent\nconst aiResponse = $input.first().json.output;\n\n// Simply return it - the chat will display it automatically\nreturn {\n  json: {\n    output: aiResponse\n  }\n};"
+        "jsCode": "const aiResponse = $input.first().json.output;\n// 改成你的 Set 節點實際名稱！檢查節點上方顯示的名字\nconst replyToken = $('Set').first().json.replyToken;\n\nreturn {\n  json: {\n    replyToken: replyToken,\n    messages: [{ type: \"text\", text: aiResponse }]\n  }\n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1616,
-        0
+        1424,
+        -784
       ],
-      "id": "dae82e82-2b8f-488a-be14-b57d102124f9",
-      "name": "Code",
-      "disabled": true
+      "id": "12d076c0-936b-4096-a7a0-fcffddcf3439",
+      "name": "Code"
     },
     {
       "parameters": {
@@ -226,13 +614,13 @@
             {
               "id": "33043313-d11a-41a5-ba01-00adc5fd1904",
               "name": "prompt",
-              "value": "=你是發票處理專家AI\nOCR發票：{{ $json.debug.extracted_text.map(item => item.text).join(' ') }}\n整理成：日期|地點|重量|金額\n修正園→圓，<0.6標⚠️\n收到的OCR資料包含手寫中文發票。任務：\n1. 從OCR結果找出：送貨日期、送貨地點（起終點）、載運重量、金額\n2. 修正常見錯誤：\n   - \"园\" → \"圓\" \n   - 數字混淆（0/O, 1/I等）\n3. 低信心度(<0.6)項目標註⚠️\n\n輸出格式（表格）：\n\n送貨日期 | 送貨地點 | 載運重量 | 金額\n8/6 | 岡山 全聯 | 13.5板 | 124540\n",
+              "value": "=你是發票處理專家AI\nOCR發票：{{ $json.fullText }}\n整理成：日期|地點|重量|金額\n修正園→圓，<0.6標⚠️\n收到的OCR資料包含手寫中文發票。任務：\n1. 從OCR結果找出：送貨日期、送貨地點（起終點）、載運重量、金額\n2. 修正常見錯誤：\n   - \"园\" → \"圓\" \n   - 數字混淆（0/O, 1/I等）\n3. 低信心度(<0.6)項目標註⚠️\n\n輸出格式（表格）：\n\n送貨日期 | 送貨地點 | 載運重量 | 金額\n8/6 | 岡山 全聯 | 13.5板 | 124540\n",
               "type": "string"
             },
             {
-              "id": "1580c4d6-d020-4755-bf6e-b6cabad7a078",
-              "name": "",
-              "value": "={{ $('When chat message received').item.json.sessionId }}",
+              "id": "4a64c6e7-6118-4066-ad33-c3b442763033",
+              "name": "replyToken",
+              "value": "={{ $json.replyToken }}",
               "type": "string"
             }
           ]
@@ -242,85 +630,177 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1040,
-        0
+        848,
+        -784
       ],
-      "id": "1138dd6b-6dfa-4ca2-8052-afe602956150",
+      "id": "c4f6dd39-a01c-47ef-b9d6-660b4ad9c4e3",
       "name": "Set"
     },
     {
       "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "={{ $('When chat message received').item.json.sessionId }}"
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        1400,
-        224
-      ],
-      "id": "a8870f45-181e-4a4e-8942-e899239cb21f",
-      "name": "Simple Memory"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://gionie-my-fastapi-paddleocr.hf.space/ocr",
-        "sendBody": true,
-        "contentType": "multipart-form-data",
-        "bodyParameters": {
+        "toolDescription": "Brave Search online tool",
+        "url": "https://api.search.brave.com/res/v1/web/search",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
           "parameters": [
             {
-              "parameterType": "formBinaryData",
-              "name": "file",
-              "inputDataFieldName": "data0"
+              "name": "=q",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', ``, 'string') }}"
+            },
+            {
+              "name": "count",
+              "value": "3"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "=X-Subscription-Token",
+              "value": "=BSAbIjHxTHqAcA4Mz7kEJ-22QINZy7H"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
             }
           ]
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.httpRequest",
+      "type": "n8n-nodes-base.httpRequestTool",
       "typeVersion": 4.2,
       "position": [
-        592,
-        0
+        64,
+        -264
       ],
-      "id": "5d2b8f8b-d780-4cc9-b716-3eaa9379e239",
-      "name": "HTTP Request2"
+      "id": "4f2aa113-874e-42db-9895-38884b405e7c",
+      "name": "Brave",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "XhkvUemEast99W3j",
+          "name": "Header Auth account"
+        }
+      }
     },
     {
       "parameters": {
-        "operation": "write",
-        "fileName": "/tmp/ocr_image.jpg",
-        "dataPropertyName": "=data0",
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.events[0].source.userId }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1208,
+        -560
+      ],
+      "id": "8e5a75bc-b7ee-4ea0-8278-fcc22afe4fe4",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.events[0].source.userId }}",
+        "contextWindowLength": 15
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -704,
+        -264
+      ],
+      "id": "57721f3d-4641-409c-985a-add1925a5eb8",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {
         "options": {}
       },
-      "type": "n8n-nodes-base.readWriteFile",
+      "type": "@n8n/n8n-nodes-langchain.toolSearXng",
       "typeVersion": 1,
       "position": [
-        368,
-        0
+        192,
+        -264
       ],
-      "id": "2a148d31-600d-4ee6-a4d8-f0c9c44d87e9",
-      "name": "Read/Write Files from Disk"
+      "id": "80066452-7fac-46a5-9c46-ec5eca1635db",
+      "name": "SearXNG",
+      "credentials": {
+        "searXngApi": {
+          "id": "VMYqRADbkXv0ZfDl",
+          "name": "SearXNG account"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "x-forwarded-for": "147.92.150.197",
+            "x-forwarded-proto": "https",
+            "x-forwarded-port": "443",
+            "host": "gionie-n8n-free.hf.space",
+            "x-amzn-trace-id": "Root=1-68fb6420-0d83618b5664c35e7df42f7b",
+            "content-length": "581",
+            "x-line-signature": "BGLceKc4CCG6Cx3NrZqY1ccWj+JiApWJtk9+xds56C4=",
+            "content-type": "application/json; charset=utf-8",
+            "user-agent": "LineBotWebhook/2.0",
+            "x-request-id": "DLC5Xm, DLC5Xm",
+            "x-direct-url": "https://gionie-n8n-free.hf.space/--replicas/zxr8d/webhook/callback"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "destination": "Ua5a2f6a998c71ce952b6621833b460ed",
+            "events": [
+              {
+                "type": "message",
+                "message": {
+                  "type": "image",
+                  "id": "584642904933531686",
+                  "quoteToken": "frnMYzTuDcW3zq2uWmId8HjU5T3SQwxrKlBdfoUljqFrm4eS358yqSB-yJhliimuif8wDNIQHVGn6nw8nbCCnwLt2cKCcDCEqbdIfNNN_ET5YKppl9nfmCDbr19YV_SVpXjJ3rrB_z8Am_sxcTyNUQ",
+                  "contentProvider": {
+                    "type": "line"
+                  }
+                },
+                "webhookEventId": "01K8AZY6QX49661M1429MB6MA1",
+                "deliveryContext": {
+                  "isRedelivery": false
+                },
+                "timestamp": 1761305631147,
+                "source": {
+                  "type": "user",
+                  "userId": "U0e8f5ec2c86ea8542b4e67cc947c0f20"
+                },
+                "replyToken": "629a27a98f9f49a6af13f225dceaa873",
+                "mode": "active"
+              }
+            ]
+          },
+          "webhookUrl": "https://Gionie-n8n-free.hf.space/webhook/callback",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "shared": [
     {
-      "createdAt": "2025-10-19T07:49:43.783Z",
-      "updatedAt": "2025-10-19T07:49:43.783Z",
+      "createdAt": "2025-10-20T10:29:20.515Z",
+      "updatedAt": "2025-10-20T10:29:20.515Z",
       "role": "workflow:owner",
-      "workflowId": "75LuP8uvdbaoncct",
+      "workflowId": "OlmUnWHBwAwUhvbX",
       "projectId": "SOgRqgJfaND0d4bJ"
     }
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-11-05T03:22:48.044Z",
-  "versionId": "46dd07b0-2675-4674-aa0c-cf73cc96ba7e"
+  "triggerCount": 1,
+  "updatedAt": "2025-10-25T17:40:45.353Z",
+  "versionId": "97082689-b3df-4ee9-a449-9670743c09bf"
 }
